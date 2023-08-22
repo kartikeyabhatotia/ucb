@@ -1,27 +1,33 @@
 #install and load all the packages needed
-x <- c("ggmap", "rgdal", "rgeos", "maptools", "dplyr", "tidyr", "tmap")
+x <- c("ggmap", "rgdal", "rgeos", "maptools", "dplyr", "tidyr", "tmap", "maptools", "leaflet", "sf")
 # install.packages(x) # warning: uncommenting this may take a number of minutes
 lapply(x, library, character.only = TRUE) # load the required packages
-install.packages("rgeos")
-install.packages("maptools")
-install.packages("leaflet")
-library(maptools)
-library(rgeos)
-library(rgdal)
-library(sf)
-library(dplyr)
-library(leaflet)
-#let's plot the map of Bolivia first!
+
+#Sometimes, R will still find a lot of packages missing
+#So install them separately!
+#install.packages("rgeos")
+#install.packages("maptools")
+#install.packages("leaflet")
+#library(maptools)
+#library(rgeos)
+#library(rgdal)
+#library(sf)
+#library(dplyr)
+#library(leaflet)
+
+
+
+#Exercise 1: let's plot the map of Bolivia first!
 bol <- readOGR(dsn = "bol_admbnda_adm0_gov_itos_2020514.shp")
 head(bol@data, n =10)
 plot(bol)
 
-#plotting the map of Bolivian departments
+#Exercise 2: plotting the map of Bolivian departments
 bol_dept <- readOGR(dsn = "bol_admbnda_adm1_gov_2020514.shp")
-plot(bol_dept)
 head(bol_dept@data, n =10)
+plot(bol_dept)
 
-#where are we? let's colour that!
+#Exercise 3: where are we? let's colour that!
 plot(bol_dept, col = "lightgrey")
 plot(bol_dept[bol_dept$ADM1_ES == "La Paz", ], col = "turquoise", add = TRUE)
 
